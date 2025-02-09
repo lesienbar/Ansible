@@ -1,0 +1,5 @@
+---
+  - name: Inastall Apache WebServer
+    apt: name=httpd state=latest
+    notify:
+    - restart apache

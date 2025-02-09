@@ -1,0 +1,55 @@
+---
+  - name: Inastall Nginx WebServer
+    apt: name=nginx state=latest
+    notify:
+    - restart nginx
+
+
+  - name: Creates directory
+    ansible.builtin.file:
+      path: /var/www/html/images
+      state: directory
+
+
+  - name: copying file with playbook
+    become: true
+    copy:
+      src: ./templates/tiger.jpg
+      dest: /var/www/html/images/tiger.jpg
+      owner: root
+      group: root
+      mode: 0644
+
+
+  - name: Delete config file Nginx
+    file:
+      path: /etc/nginx/sites-enabled/default
+      state: absent
+
+  - name: Delete config file Nginx
+    file:
+      path: /etc/nginx/sites-available/default
+      state: absent
+
+  - name: copying file with playbook
+    become: true
+    copy:
+      src: ./templates/image
+      dest: /etc/nginx/sites-enabled/image
+      owner: root
+      group: root
+      mode: 0644
+
+
+  - name: copying file with playbook
+    become: true
+    copy:
+      src: ./templates/image
+      dest: /etc/nginx/sites-available/image
+      owner: root
+      group: root
+      mode: 0644
+
+
+
+
