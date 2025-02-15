@@ -50,6 +50,7 @@
       group: root
       mode: 0644
 
-
+  - name: Rename file 
+    command: mv /var/www/html/index.nginx-debian.html index1.html
 
 

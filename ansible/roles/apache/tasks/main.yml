@@ -1,5 +1,58 @@
 ---
-  - name: Inastall Apache WebServer
-    apt: name=httpd state=latest
-    notify:
-    - restart apache
+
+ - name: Update apt package cashe
+   apt:
+     update_cache: yes
+ 
+ - name: Inastall Apache WebServer
+   apt: name=apache2 state=latest
+   notify:
+    - restart apache2
+
+ - name: Delete config file Apache
+   file:
+     path: /etc/apache2/ports.conf
+     state: absent
+
+ - name: Delete config file Apache
+   file:
+     path: /etc/apache2/sites-enabled/000-default.conf
+     state: absent
+
+ - name: Delete config file Apache
+   file:
+     path: /etc/apache2/sites-available/000-default.conf
+     state: absent
+
+ - name: copying file with playbook
+   become: true
+   copy:
+     src: ./templates/ports.conf
+     dest: /etc/apache2/ports.conf
+     owner: root
+     group: root
+     mode: 0644
+
+
+ - name: copying file with playbook
+   become: true
+   copy:
+     src: ./templates/000-default.conf
+     dest: /etc/apache2/sites-enabled/000-default.conf
+     owner: root
+     group: root
+     mode: 0644
+
+ - name: copying file with playbook
+   become: true
+   copy:
+     src: ./templates/000-default.conf
+     dest: /etc/apache2/sites-available/000-default.conf
+     owner: root
+     group: root
+     mode: 0644
+     notify:
+      - restart apache2
+
+ 
+ 
