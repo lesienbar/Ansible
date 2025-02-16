@@ -16,39 +16,39 @@
     copy:
       src: ./templates/tiger.jpg
       dest: /var/www/html/images/tiger.jpg
-      owner: root
-      group: root
-      mode: 0644
+      owner: "{{ owner }}"
+      group: "{{ group }}"
+      mode: "{{ mode }}"
 
 
-  - name: Delete config file Nginx
+  - name: "{{ name }}"
     file:
-      path: /etc/nginx/sites-enabled/default
-      state: absent
+      path: "{{ path }}"
+      state: "{{ state }}"
 
-  - name: Delete config file Nginx
+  - name: "{{ name }}"
     file:
       path: /etc/nginx/sites-available/default
-      state: absent
+      state: "{{ state }}"
 
   - name: copying file with playbook
     become: true
     copy:
-      src: ./templates/image
-      dest: /etc/nginx/sites-enabled/image
-      owner: root
-      group: root
-      mode: 0644
+      src: "{{ src }}"
+      dest: "{{ dest }}"
+      owner: "{{ owner }}"
+      group: "{{ group }}"
+      mode: "{{ mode }}"
 
 
   - name: copying file with playbook
     become: true
     copy:
-      src: ./templates/image
+      src: "{{ src }}"
       dest: /etc/nginx/sites-available/image
-      owner: root
-      group: root
-      mode: 0644
+      owner: "{{ owner }}"
+      group: "{{ group }}"
+      mode: "{{ mode }}"
 
   - name: Rename file 
     command: mv /var/www/html/index.nginx-debian.html index1.html

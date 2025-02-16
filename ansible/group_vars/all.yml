@@ -1,0 +1,10 @@
+path: /etc/nginx/sites-enabled/default
+command: mv /var/www/html/index.nginx-debian.html index1.html
+owner: root
+mode: 0644
+state: absent
+group: root
+src: ./templates/image
+dest: /etc/nginx/sites-enabled/image
+name: Delete config file Nginx
+ 
